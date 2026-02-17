@@ -1,0 +1,73 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: #0f172a;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: linear-gradient(135deg, #eff6ff, #f0fdf4); }
+
+.page { min-height: 100vh; padding: 24px; display: grid; place-items: center; }
+.card {
+  width: min(900px, 100%);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+  padding: 24px;
+}
+.center { text-align: center; }
+h1, h2, h3, h4 { margin: 0 0 12px; }
+.subtitle { color: #475569; margin-bottom: 20px; }
+.small { color: #64748b; font-size: 14px; }
+.feature-list { text-align: left; margin: 0 auto 20px; max-width: 320px; color: #1e293b; }
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+button:disabled { background: #94a3b8; cursor: not-allowed; }
+button.secondary { background: #e2e8f0; color: #1e293b; }
+.row { display: flex; gap: 12px; align-items: center; margin-top: 18px; }
+
+.progress { width: 100%; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin: 10px 0 18px; }
+.progress > span { display: block; height: 8px; background: #2563eb; }
+input[type='range'] { width: 100%; }
+.value { text-align: center; font-size: 24px; color: #1d4ed8; }
+
+.choices { display: grid; gap: 10px; }
+.choice { text-align: left; width: 100%; background: white; color: #0f172a; border: 1px solid #cbd5e1; }
+.choice.active { border: 2px solid #2563eb; background: #eff6ff; }
+
+.score { font-size: 32px; font-weight: 700; color: #1d4ed8; margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.pill { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 10px; }
+.stack { display: grid; gap: 12px; }
+.recommendation, .facility { border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; padding: 12px; border-radius: 8px; }
+
+.chat-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  font-size: 22px;
+}
+.chat-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 82px;
+  width: min(340px, calc(100vw - 40px));
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  padding: 12px;
+}
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .row { flex-wrap: wrap; }
+}
