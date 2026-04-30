@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: waazi
+      POSTGRES_USER: waazi
+      POSTGRES_PASSWORD: waazi
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U waazi"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./health-risk-mvp/backend
+    restart: unless-stopped
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./health-risk-mvp/backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: dev-secret-key-change-in-production
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend"
+      DB_NAME: waazi
+      DB_USER: waazi
+      DB_PASSWORD: waazi
+      DB_HOST: db
+      DB_PORT: "5432"
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      CORS_ALLOWED_ORIGINS: "http://localhost:5173"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./health-risk-mvp/frontend
+    restart: unless-stopped
+    volumes:
+      - ./health-risk-mvp/frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://backend:8000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

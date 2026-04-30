@@ -1,0 +1,41 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.Python
+health-risk-mvp/backend/venv/
+health-risk-mvp/backend/*.sqlite3
+health-risk-mvp/backend/.env
+health-risk-mvp/backend/staticfiles/
+
+# Node / React
+node_modules/
+health-risk-mvp/frontend/node_modules/
+health-risk-mvp/frontend/dist/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Docker
+postgres_data/
+
+# Editor / OS
+.vscode/
+.idea/
+*.DS_Store
+*.swp
+*.swo
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# Repo meta / docs
+agent-instructions/
+.github/
